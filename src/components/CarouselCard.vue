@@ -1,18 +1,31 @@
 <template>
-    <div class="carousel">
+    <div class="container">
         <swiper :options="swiperOption" class="swiper-box">
-            <swiper-slide class="swiper-item">
-                <div class="yellowCard">
+            <swiper-slide class="swiper-item" >
+                <div class="yellowCard" id="yellowCard">
                     <h1>{{"Yellow Card"}}</h1>
                 </div>
             </swiper-slide>
             <swiper-slide class="swiper-item">                
                 <div class="visa">
                     <img src="../assets/visa.png"/>
-                    <h1><span>•••• •••• ••••</span> 9760</h1>
+                    <div class="row">
+                      <div class="col-md-12"><h1><span>•••• •••• ••••</span> 9760</h1></div>
+                    </div>
+                    <div class="row"> 
+                      <div class="col-md-9">
+                        <h2>Name</h2>
+                        <br/>
+                        <p>VLADYSLAV TYZUN</p>
+                      </div>
+                      <div class="col-md-3">
+                        <h2>Expiration date</h2>
+                        <p>11 / 19</p>
+                      </div>
+                    </div>
                 </div></swiper-slide>
             <swiper-slide class="swiper-item">                
-              <div class="pickCard">
+              <div class="pinkCard" id="pinkCard">
                     <h1>{{"Pick Card"}}</h1>
                 </div></swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
@@ -21,39 +34,40 @@
 </template>
 
 <script>
-import 'swiper/dist/css/swiper.css'
+import "swiper/dist/css/swiper.css";
 
-import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import { swiper, swiperSlide } from "vue-awesome-swiper";
 
 export default {
   data() {
-      return {
-        swiperOption: {
-          direction: "horizontal",
-          slidesPerView: 1,
-          initialSlide: 1,
-          // spaceBetween: 100,
-          mousewheel: true,
-          spaceBetween: 100,
-          centeredSlides: true,
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true
-          }
+    return {
+      swiperOption: {
+        direction: "horizontal",
+        slidesPerView: 1,
+        initialSlide: 1,
+        // spaceBetween: 100,
+        mousewheel: true,
+        spaceBetween: 100,
+        centeredSlides: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true
         }
       }
-    },
+    };
+  },
   components: {
     swiper,
     swiperSlide
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-.carousel {
-  height: 30vh;
+.container {
+  padding: 0.5px;
+  height: 240px;
   background-color: #839ce6;
 }
 .swiper-box {
@@ -84,15 +98,17 @@ export default {
   // margin-right: -100px;
 }
 .swiper-pagination-bullet {
-    background: #AABCFA;
+  background: #aabcfa;
 }
 .swiper-pagination-bullet-active {
-    background: #FCFBFF;
-    width: 9px;
-    height: 9px;
+  background: #fcfbff;
+  width: 9px;
+  height: 9px;
 }
-.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
-    margin: 0 6px;
+.swiper-container-horizontal
+  > .swiper-pagination-bullets
+  .swiper-pagination-bullet {
+  margin: 0 6px;
 }
 .visa {
   // background: linear-gradient(to right, #6678D6, #4F60BE);
@@ -100,8 +116,8 @@ export default {
   background-size: 100%;
   background-repeat: no-repeat;
   border-radius: 10px;
-  height: 22vh;
-  width: 75%;
+  height: 175px;
+  width: 307px;
   background-color: #5163c1;
   margin-bottom: 30px;
   img {
@@ -110,34 +126,90 @@ export default {
     float: right;
     width: 60px;
   }
-  h1 {
-    margin-top: 60px;
-    // margin-bottom: 4px;
-    margin-left: -100px;
+  .col-md-12 h1 {
+    margin: 80px auto 2px 16px;
+    float: left;
     letter-spacing: 1px;
     font-size: 1.5rem;
     font-weight: bold;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     color: #a9b5d5;
   }
   span {
-    font-size: 2.3rem;
+    letter-spacing: 2px;
+    font-size: 2.4rem;
+  }
+  .col-md-9 h2 {
+    margin: 0;
+    margin-left: 16px;
+    margin-top: 13px;
+    float: left;
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    color: #a9b5d5;
+  }
+  .col-md-9 p {
+    margin: 0;
+    margin-left: 16px;
+    font-weight: 500;
+    float: left;
+    letter-spacing: 1px;
+    font-size: 1.2rem;
+    color: #a9b5d5;
+  }
+  .col-md-3 h2 {
+    margin: 0;
+    margin-left: 66px;
+    margin-top: -10px;
+    float: left;
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    color: #a9b5d5;
+  }
+  .col-md-3 p {
+    margin: 0;
+    margin-left: 66px;
+    font-weight: 500;
+    margin-top: -1px;
+    float: left;
+    letter-spacing: 1px;
+    font-size: 1.2rem;
+    color: #a9b5d5;
   }
 }
-.pickCard {
-  // margin-left: -320px;
+.pinkCard {
   border-radius: 10px;
-  height: 22vh;
-  width: 75%;
-  background-color: #FB95B8;
+  height: 175px;
+  width: 307px;
+  background-color: #fb95b8;
   margin-bottom: 30px;
+}
+#pinkCard {
+  height: 149px;
+  margin-right: 518px;
+  z-index: 10;
+  padding-left: 0;
+  h1 {
+    color: #fb95b8;
+  }
 }
 .yellowCard {
   // margin-right: -350px;
   border-radius: 10px;
-  height: 22vh;
-  width: 75%;
-  background-color: #EBCC63;
+  height: 175px;
+  width: 307px;
+  background-color: #ebcc63;
   margin-bottom: 30px;
+}
+#yellowCard {
+  height: 149px;
+  margin-left: 495px;
+  z-index: 10;
+  padding-right: 0;
+  h1 {
+    color: #ebcc63;
+  }
 }
 </style>

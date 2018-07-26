@@ -5,10 +5,13 @@
                 <label>{{ 'CARD DETAILS ' }}</label>
             </div>
             <div class="errorMsg">
-                <p v-if="$v.name.$error"> #This field must not be empty.</p>
+                
+                <p v-if="$v.name.$error"> #This field must not be empty.</p> <!-- AFLF: Message error validations of Name empty -->
                 <p v-if="!$v.number.minLen"> #Number must be min 16 numbers.</p>
                 <p v-if="!$v.number.maxLen"> #Number must be max 16 numbers.</p>
-                <p v-if="!$v.date.unique.val == 0"> #Enter a valid date.</p>
+                <p v-if="!$v.date.unique"> #Enter a valid month date.</p>
+                <p v-if="!$v.year.unique"> #Enter a valid year date.</p>
+                <!-- <p>{{ $v.year.unique }}</p> -->
             </div>
         </div>
         <form @submit.prevent="onSubmit">
@@ -50,7 +53,14 @@
                     id="date"
                     @blur="$v.date.$touch()" 
                     v-model.number="date"
-                    placeholder="11 / 19"/>
+                    placeholder="11"/><span>/</span><input 
+
+                    type="number" 
+                    id="year"
+                    @blur="$v.year.$touch()" 
+                    v-model.number="year"
+                    placeholder="19"/>
+
             </div>
             <div class="col-md-5 cvv">
                 <input type="number" id="cvv" v-model.number="cvv"  placeholder="CVV"/>
@@ -60,11 +70,11 @@
             </div>
         </div>
         </form>
-        <hr/> 
-        <div class="row">
+        <hr/>
+        <div class="row rowProceed">
             <button type="submit" class="btnProceed">Proceed to Checkout</button>
         </div>
-        <div>{{ $v }}</div>
+        <!-- <div>{{ $v }}</div> -->
     </div>   
 </template>
 
@@ -77,6 +87,7 @@ export default {
         name: '',
         number: null,
         date: '',
+        year: '',
         cvv: null
     }
   },
@@ -92,22 +103,34 @@ export default {
       },
       date: {
         unique: val => {
-            if (val === '') return true
+            // if (val === '') return true
             return new Promise((resolve) => {
                 setTimeout(() => {
-                    val = val.substring((val.length-2), val.length)
-                    resolve(val < 18)
-                    return val
+                    resolve(val <= 12 && val > 0 || val == '')
+                    return false  
+                }, 1000)
+            })
+        }
+      },
+      year: {
+        unique: val => {
+            // if (val === '') return true
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve(val >= 18 || val == '')
+                    return false  
                 }, 1000)
             })
         }
       }
+
   },
   onSubmit () {
       const formData = {
           name: this.name,
           number: this.number,
           date: this.date,
+          year: this.year,
           cvv: this.cvv
       }
     //   console.log(formData)
@@ -119,6 +142,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
     ::placeholder {
+        padding:0;
+        /* color: #4A5FA7; */
         color: #a9b5d5;
         font-weight: 500;
         letter-spacing: 1px;
@@ -133,13 +158,15 @@ export default {
         background-color: white;
     }
     .cardDetails {
-        height: 50px;
+        height: 54px;
         background-color: #e8ebf6;
     }
-    .cardDetails h1 {
+    .cardDetails label {
         font-size: 1.2rem;
-        letter-spacing: .5px;
-        padding-top: 10px;
+        letter-spacing: 1px;
+        padding-top: 5px;
+        margin-left: 17px;
+        padding-left: 0;
     }
     .col-md-7 label {
         margin-top: 15px;
@@ -156,9 +183,10 @@ export default {
     }
 
     label {
-        margin-top: 5px;
-        margin-bottom: 4px;
-        padding-left: 22px;
+        margin-top: 15px;
+        margin-bottom: 0px;
+        padding-bottom: 0;
+        padding-left: 17px;
         font-size: 1.3rem;
         color: #a9b5d5;
     }
@@ -167,32 +195,35 @@ export default {
         border: 1px solid red;
         background-color: #f7f7f7;
     }
-
-    /* .col-md-12, .col-md-4, .col-md-9, .col-md-5, h1 {
-        margin-top: 5px;
-        margin-bottom: 4px;
-        padding-left: 22px;
-        font-size: 1.3rem;
-        color: #a9b5d5;
-    } */
-    /* .col-md-4 .col-md-5 h1{
-        padding-top: 5px;
-        font-size: 1.6rem;
-        font-weight: bold;
-        margin-bottom: 2px;
-    } */
     .col-md-3 {
         width: 10%;
     }
+    
     .expDate {
-        max-width: 182px;
+        max-width: 170px;
+        min-width: 170px;
     }
+    .expDate input {
+        margin-top: -5px;
+        max-width: 30px;
+    }
+    .expDate span {
+        color: #4A5FA7;
+        font-size: 1.5rem;
+    }
+    #year {
+        padding: 0;
+        margin-top: -6px;
+    }
+
+
     .cvv {
         margin: 0;
         border-left: 1px solid #e8ebf6;
     }
     .col-md-9, .col-md-6, .col-md-4, .col-md-3, .col-md-2, .col-md-5{
-        max-height: 70px;
+        max-height: 64px;
+        height: 64px;
         background-color: white;
         width: 100%;
     }
@@ -200,22 +231,25 @@ export default {
         width: 60%;
     }
     .col-md-9 input {
-        margin-left: 20px;
-        padding-left: 3px;
+        margin-left: 18px;
+        padding-top: 0;
+        padding-left: 0px;
         margin-bottom: 2px;
         height: 30px;
         color: #4A5FA7;
-        font-size: 1.7rem;
+        font-size: 1.5rem;
         width: 95%;
         background-color: white;
         border: none;
     }
     .col-md-5 input {
-        margin-bottom: 2px;
-        padding-left: 3px;
+        /* margin-bottom: 2px; */
+        padding-bottom: 0px;
+        padding-left: 0px;
         height: 30px;
-        margin-left: 22px;
-        font-size: 1.7rem;
+        margin-left: 18px;
+        /* margin-right: 25px; */
+        font-size: 1.5rem;
         color: #4A5FA7;
         background-color: white;
         border: none;
@@ -225,13 +259,17 @@ export default {
     .cvv input {
         margin-bottom: 2px;
         padding-left: 0;
-        margin-left: 0;
+        margin-left: 20px;
         margin-top: 22px;
-        font-size: 1.7rem;
+        font-size: 1.5rem;
         color: #4A5FA7;
         width: 55px;
         background-color: white;
         border: none;
+    }
+    #cvv::-webkit-input-placeholder{
+        color: #a9b5d5;
+        font-weight: 500;
     }
     .fas, .far {
         font-size: 2rem;
@@ -250,6 +288,11 @@ export default {
     }
     hr {
         margin: 0;
+
+    }
+    .rowProceed {
+        width: 100%;
+        background-color: white;
     }
     .btnProceed {
         margin-top: 15px;
@@ -258,8 +301,8 @@ export default {
         color: white;
         font-size: 2rem;
         background-color: #67d48b;
-        max-height: 60px;
-        height: 70px;
+        max-height: 72px;
+        height: 72px;
     }
 
 </style>

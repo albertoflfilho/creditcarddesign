@@ -26,12 +26,13 @@ export default {
     .container {
         color: white;
         background-color: #839CE6;
-        height: 10vh;
+        max-height: 30px;
         max-width: 100%;
     }
     .row {
-        /* width: 100%; */
+        margin-right: 0px;
         padding-top: 15px;
+
         text-align: center;
     }
     h1 {
