@@ -1,24 +1,21 @@
 <template>
   <div id="app">
-    <Test class="test" msg="creditCardDesign Test from AlayaCare"/>
     <CreditCardDesign />
   </div>
 </template>
 
 <script>
-import Test from './components/Test.vue';
 import CreditCardDesign from './components/CreditCardDesign.vue';
 
 export default {
   name: 'app',
   components: {
-    Test,
     CreditCardDesign
   }
 }
 </script>
 
-<style>
+<style lang="scss">
 body {
   background: url('./assets/bg.png');
   background-repeat: none;

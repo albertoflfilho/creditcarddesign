@@ -1,5 +1,5 @@
 <template>
-  <div class="creditCardDesign">
+  <div class="container">
     <Header/>
     <CarouselCard/>
     <CardDetails/>
@@ -24,8 +24,10 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-.creditCardDesign {
-    max-width: 100%;
+.container {
+    padding: 0;
+    margin: auto;
+    max-width: 375px;
 }
 
 </style>

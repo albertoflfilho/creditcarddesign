@@ -16,6 +16,7 @@
                       <div class="col-md-9">
                         <h2>Name</h2>
                         <br/>
+                        <!-- <p>{{ CardDetails.Card.holder }}</p> -->
                         <p>VLADYSLAV TYZUN</p>
                       </div>
                       <div class="col-md-3">
@@ -34,8 +35,8 @@
 </template>
 
 <script>
+import CardDetails from './CardDetails.vue';
 import "swiper/dist/css/swiper.css";
-
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 
 export default {
@@ -45,7 +46,6 @@ export default {
         direction: "horizontal",
         slidesPerView: 1,
         initialSlide: 1,
-        // spaceBetween: 100,
         mousewheel: true,
         spaceBetween: 100,
         centeredSlides: true,
@@ -57,6 +57,7 @@ export default {
     };
   },
   components: {
+    CardDetails,
     swiper,
     swiperSlide
   }
@@ -111,7 +112,6 @@ export default {
   margin: 0 6px;
 }
 .visa {
-  // background: linear-gradient(to right, #6678D6, #4F60BE);
   background: url(../assets/visaWorld.png);
   background-size: 100%;
   background-repeat: no-repeat;
@@ -125,7 +125,7 @@ export default {
     margin-right: 15px;
     float: right;
     width: 60px;
-  }
+  }  
   .col-md-12 h1 {
     margin: 80px auto 2px 16px;
     float: left;
@@ -135,6 +135,12 @@ export default {
     font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     color: #a9b5d5;
   }
+  @media (min-width: 992px) {
+    .col-md-12 h1 {
+      margin: 55px auto 2px 16px;
+    }
+  }
+
   span {
     letter-spacing: 2px;
     font-size: 2.4rem;
@@ -168,6 +174,7 @@ export default {
     font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     color: #a9b5d5;
   }
+
   .col-md-3 p {
     margin: 0;
     margin-left: 66px;
@@ -177,6 +184,17 @@ export default {
     letter-spacing: 1px;
     font-size: 1.2rem;
     color: #a9b5d5;
+  }
+  @media (min-width: 992px) {
+    .col-md-3 h2 {
+      margin: 0;
+      margin-left: -25px;
+      margin-top: 13px;
+    }
+    .col-md-3 p {
+      margin: 0;
+      margin-left: -25px;
+    }
   }
 }
 .pinkCard {
@@ -196,7 +214,6 @@ export default {
   }
 }
 .yellowCard {
-  // margin-right: -350px;
   border-radius: 10px;
   height: 175px;
   width: 307px;
@@ -206,10 +223,13 @@ export default {
 #yellowCard {
   height: 149px;
   margin-left: 495px;
-  z-index: 10;
+  z-index: 13;
   padding-right: 0;
   h1 {
     color: #ebcc63;
+  }
+  div.swiper-item.swiper-slide.swiper-slide-prev.yellowCard {
+    z-index: 11;
   }
 }
 </style>
