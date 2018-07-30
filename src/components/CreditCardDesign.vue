@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import Header from './Header.vue';
-import CardDetails from './CardDetails.vue';
-import CarouselCard from './CarouselCard.vue';
+import Header from './Header.vue'
+import CardDetails from './CardDetails.vue'
+import CarouselCard from './CarouselCard.vue'
 
 export default {
   name: 'CreditCardDesign',

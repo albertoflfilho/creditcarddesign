@@ -8,7 +8,7 @@ import VeeValidate from 'vee-validate'
 Vue.use(VueAwesomeSwiper)
 Vue.use(VueSweetAlert2)
 Vue.use(VeeValidate, {
-  events : 'change|blur|keypress'
+  events: 'change|blur|keypress'
 })
 
 Vue.config.productionTip = false

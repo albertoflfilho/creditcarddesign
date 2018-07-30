@@ -9,16 +9,13 @@
         <div class="row">
             <div class="col-md-9">
                 <label for="name">Name</label>
-                <input 
-                    type="text" 
+                <input
+                    type="text"
                     id="name"
-                    name="credit_card_holder" 
-                    v-model="Card.holder" 
+                    name="credit_card_holder"
+                    v-model="Card.holder"
                     v-validate="{required : true, alpha : true}"
                     placeholder="Vladyslav Tyzun"/>
-                    <p v-if="errors.has('credit_card_holder')" class="error-message">
-                        {{errors.first('credit_card_holder')}}
-                    </p>
             </div>
             <div class="col-md-3">
                 <i class="far fa-user"></i>
@@ -29,11 +26,11 @@
             <div class="col-md-9">
                 <label for="number">Card number</label>
                 <input
-                    type="text" 
-                    id="number" 
+                    type="text"
+                    id="number"
                     name="credit_card_number"
                     v-validate="{required: true, credit_card : true}"
-                    v-model="Card.number"  
+                    v-model="Card.number"
                     placeholder="0072 5420 2145 9760"/>
             </div>
             <div class="col-md-3">
@@ -44,18 +41,18 @@
         <div class="row">
             <div class="col-md-5 expDate">
                 <label for="date">Expiration date</label>
-                <input 
-                    type="text" 
+                <input
+                    type="text"
                     id="date"
                     name="credit_cart_month"
                     v-model="Card.expiration_month"
                     v-validate="{required : true, decimal : true, max_value : '12', min_value : '1' }"
                     placeholder="11"/>
                     <span>/</span>
-                <input 
-                    type="text" 
+                <input
+                    type="text"
                     id="year"
-                    name="creadit_card_year"
+                    name="credit_card_year"
                     v-validate="{required: true, decimal : true, min_value : '18'}"
                     v-model="Card.expiration_year"
                     placeholder="19"/>
@@ -83,41 +80,44 @@
 
 <script>
 export default {
-  name: "CardDetails",
-  data() {
+  name: 'CardDetails',
+  data () {
     return {
       Card: {
-        holder: "",
-        number: "",
-        expiration_month: "",
-        expiration_year: "",
-        cvv: ""
+        holder: 'AlayaCare',
+        number: '',
+        expiration_month: '',
+        expiration_year: '',
+        cvv: ''
       }
-    };
+    }
   },
-  methods : {
-      onSubmit () {
-          this.$validator.validate().then((result) => {
-            if(result) {
-                this.$swal({
-                    type: 'error',
-                    title: 'Oops...',
-                    text: 'Something went wrong!',
-                    footer: '<a href="https://www.linkedin.com/in/albertoflfilho/">Alberto Lacerda | Test for AlayaCare | Click to LinkedIn Profile</a>'
-                })
-            } else {
-                this.$swal({
-                    type: 'info',
-                    title: 'HI !',
-                    text: 'This is a test for AlayaCare',
-                    footer: '<a href="https://www.linkedin.com/in/albertoflfilho/">Alberto Lacerda | Test for AlayaCare | Click to LinkedIn Profile</a>'
-                    // footer: '<a href>Why do I have this issue?</a>'
-                })
-            }
-          });
-      }
+  methods: {
+    onSubmit () {
+      this.$validator.validate().then((result) => {
+        if (!result) {
+          this.$swal({
+            type: 'error',
+            title: 'There was an error!',
+            html: `   <p v-if="this.errors.first('credit_card_holder') !== underfined">${this.errors.first('credit_card_holder')}</p>
+                      <p>${this.errors.first('credit_card_number')}</p>
+                      <p>${this.errors.first('credit_cart_month')}</p>
+                      <p>${this.errors.first('credit_card_year')}</p>
+                    `,
+            footer: '<a href="https://www.linkedin.com/in/albertoflfilho/">Alberto Lacerda | Test for AlayaCare | Click to LinkedIn Profile</a>'
+          })
+        } else {
+          this.$swal({
+            type: 'info',
+            title: 'HI !',
+            text: 'This is a test for AlayaCare',
+            footer: '<a href="https://www.linkedin.com/in/albertoflfilho/">Alberto Lacerda | Test for AlayaCare | Click to LinkedIn Profile</a>'
+          })
+        }
+      })
+    }
   }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

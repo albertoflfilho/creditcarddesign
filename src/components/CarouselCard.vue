@@ -6,13 +6,13 @@
                     <h1>{{"Yellow Card"}}</h1>
                 </div>
             </swiper-slide>
-            <swiper-slide class="swiper-item">                
+            <swiper-slide class="swiper-item">
                 <div class="visa">
                     <img src="../assets/visa.png"/>
                     <div class="row">
                       <div class="col-md-12"><h1><span>•••• •••• ••••</span> 9760</h1></div>
                     </div>
-                    <div class="row"> 
+                    <div class="row">
                       <div class="col-md-9">
                         <h2>Name</h2>
                         <br/>
@@ -25,7 +25,7 @@
                       </div>
                     </div>
                 </div></swiper-slide>
-            <swiper-slide class="swiper-item">                
+            <swiper-slide class="swiper-item">
               <div class="pinkCard" id="pinkCard">
                     <h1>{{"Pick Card"}}</h1>
                 </div></swiper-slide>
@@ -35,33 +35,33 @@
 </template>
 
 <script>
-import CardDetails from './CardDetails.vue';
-import "swiper/dist/css/swiper.css";
-import { swiper, swiperSlide } from "vue-awesome-swiper";
+import CardDetails from './CardDetails.vue'
+import 'swiper/dist/css/swiper.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
 export default {
-  data() {
+  data () {
     return {
       swiperOption: {
-        direction: "horizontal",
+        direction: 'horizontal',
         slidesPerView: 1,
         initialSlide: 1,
         mousewheel: true,
         spaceBetween: 100,
         centeredSlides: true,
         pagination: {
-          el: ".swiper-pagination",
+          el: '.swiper-pagination',
           clickable: true
         }
       }
-    };
+    }
   },
   components: {
     CardDetails,
     swiper,
     swiperSlide
   }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -125,7 +125,7 @@ export default {
     margin-right: 15px;
     float: right;
     width: 60px;
-  }  
+  }
   .col-md-12 h1 {
     margin: 80px auto 2px 16px;
     float: left;

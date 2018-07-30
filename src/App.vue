@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import CreditCardDesign from './components/CreditCardDesign.vue';
+import CreditCardDesign from './components/CreditCardDesign.vue'
 
 export default {
   name: 'app',
