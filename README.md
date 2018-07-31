@@ -1,5 +1,7 @@
 # credit-card-design
 
+<img src="https://cdn.dribbble.com/users/612938/screenshots/2686011/attachments/555425/002_2.jpg"/>
+
 ## Project setup
 ```
 npm install
